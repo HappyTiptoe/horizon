@@ -55,8 +55,7 @@ async function init() {
   })
 
   client.on('ready', () => {
-    client.user?.setActivity('eben develop.', { type: 'WATCHING' })
-    // client.user?.setActivity('the sunset.', { type: 'WATCHING' })
+    client.user?.setActivity('the sunrise.', { type: 'WATCHING' })
     const timestamp = new Date().toLocaleString('en-GB')
     console.log(`[${timestamp}]: Bot online.`)
   })
