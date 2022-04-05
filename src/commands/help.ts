@@ -16,28 +16,31 @@ export function run(message: Message, args: string[], client: Client): void {
   }
 
   message.channel.send({
-    embed: {
-      title: 'Commands:',
-      fields: commands
-        .filter(
-          // prevent aliases from being displayed as their own commands
-          (command, commandName) => !command.opts.aliases?.includes(commandName)
-        )
-        .filter((command, commandName) => !commandName.includes(':'))
-        .map((command, commandName) => {
-          const aliases = command.opts.aliases?.join(', ') ?? ''
-          const description = `${command.opts.description}\nUsage: \`${command.opts.usage}\``
+    embeds: [
+      {
+        title: 'Commands:',
+        fields: commands
+          .filter(
+            // prevent aliases from being displayed as their own commands
+            (command, commandName) =>
+              !command.opts.aliases?.includes(commandName)
+          )
+          .filter((command, commandName) => !commandName.includes(':'))
+          .map((command, commandName) => {
+            const aliases = command.opts.aliases?.join(', ') ?? ''
+            const description = `${command.opts.description}\nUsage: \`${command.opts.usage}\``
 
-          return {
-            name: `${process.env.COMMAND_PREFIX}${commandName}${
-              aliases ? ` (${aliases})` : ''
-            }`,
-            value: description,
-            inline: true
-          }
-        }),
-      color: Color.DEFAULT
-    }
+            return {
+              name: `${process.env.COMMAND_PREFIX}${commandName}${
+                aliases ? ` (${aliases})` : ''
+              }`,
+              value: description,
+              inline: true
+            }
+          }),
+        color: Color.DEFAULT
+      }
+    ]
   })
 }
 

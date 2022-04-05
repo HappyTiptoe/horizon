@@ -188,7 +188,9 @@ export function run(message: Message, args: string[], client: Client): void {
     {}
   )
 
-  const collector = message.channel.createMessageCollector(collectorFilter)
+  const collector = message.channel.createMessageCollector({
+    filter: collectorFilter
+  })
 
   store.startGame(guildId, GameType.WORDLE)
 

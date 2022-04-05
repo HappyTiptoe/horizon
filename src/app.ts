@@ -1,4 +1,4 @@
-import Discord, { Collection } from 'discord.js'
+import { Client, Collection, Intents } from 'discord.js'
 import { readdirSync } from 'fs'
 import dotenv from 'dotenv'
 import { Command } from './types'
@@ -9,7 +9,16 @@ import { handleMessage } from './handleMessage'
 dotenv.config()
 
 async function init() {
-  const client = new Discord.Client()
+  const client = new Client({
+    intents: [
+      Intents.FLAGS.GUILDS,
+      Intents.FLAGS.GUILD_PRESENCES,
+      Intents.FLAGS.GUILD_MESSAGES,
+      Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+      Intents.FLAGS.GUILD_MESSAGE_TYPING
+    ]
+  })
+
   client.commands = new Collection()
 
   // file-based command registration
@@ -34,7 +43,7 @@ async function init() {
     })
   })
 
-  client.on('message', async (message) => {
+  client.on('messageCreate', async (message) => {
     // ignore messages from bots
     if (message.author.bot) return
 
@@ -46,7 +55,8 @@ async function init() {
   })
 
   client.on('ready', () => {
-    client.user?.setActivity('the sunset.', { type: 'WATCHING' })
+    client.user?.setActivity('eben develop.', { type: 'WATCHING' })
+    // client.user?.setActivity('the sunset.', { type: 'WATCHING' })
     const timestamp = new Date().toLocaleString('en-GB')
     console.log(`[${timestamp}]: Bot online.`)
   })

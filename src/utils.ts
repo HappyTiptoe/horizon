@@ -51,14 +51,16 @@ export function send(
   }: MessageContents = {}
 ): void {
   message.channel.send({
-    embed: {
-      title,
-      description,
-      fields,
-      image,
-      color,
-      footer: { text: footer }
-    },
+    embeds: [
+      {
+        title,
+        description,
+        fields,
+        image,
+        color,
+        footer: { text: footer }
+      }
+    ],
     files
   })
 }

@@ -27,6 +27,8 @@ export async function handleCommand(
   const [commandName, ...args] = message.content.slice(1).split(' ')
   const command = client.commands.get(commandName)
 
+  console.log(`someone used command ${commandName}`)
+
   // exit if command doesn't exist, or is invoked in DMs
   if (!command || !message.guild) return
 

@@ -36,7 +36,7 @@ export async function run(
   const drawing = getCanvasDrawing(pokemon.pixels)
   const attachment = new MessageAttachment(drawing.toBuffer(), `pixels.png`)
 
-  message.reply(attachment)
+  // message.reply(attachment)
 }
 
 export function onError(message: Message, args: string, error: Error): void {

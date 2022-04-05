@@ -194,10 +194,12 @@ async function playRound(
 
   // wait for answers
   try {
-    answers = await message.channel.awaitMessages(
-      (msg) => gameFilter(msg, solution),
-      { max: 1, time: 60000, errors: ['time'] }
-    )
+    answers = await message.channel.awaitMessages({
+      filter: (msg) => gameFilter(msg, solution),
+      max: 1,
+      time: 60000,
+      errors: ['time']
+    })
 
     clearTimeout(hintTimeout)
   } catch (_) {
