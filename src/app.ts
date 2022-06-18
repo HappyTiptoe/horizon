@@ -1,7 +1,7 @@
 import { Client, Collection, Intents } from 'discord.js'
 import { readdirSync } from 'fs'
 import dotenv from 'dotenv'
-import { Command } from './types'
+import { Command, MessageHandler } from './types'
 import { handleCommand } from './handleCommand'
 import { handleMessage } from './handleMessage'
 

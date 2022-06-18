@@ -13,17 +13,12 @@ function log({
 }): void {
   const timestamp = new Date().toLocaleString('en-GB')
   const commandStr = `[${timestamp}]: ${author} ran [${command}] in [#${channelName}]`
-  const argsStr = args.length
-    ? `\n${' '.repeat(13)}arguments: [${args.join(', ')}]`
-    : ''
+  const argsStr = args.length ? `\n${' '.repeat(13)}arguments: [${args.join(', ')}]` : ''
 
   console.log(`${commandStr}${argsStr}`)
 }
 
-export async function handleCommand(
-  client: Client,
-  message: Message
-): Promise<void> {
+export async function handleCommand(client: Client, message: Message): Promise<void> {
   const [commandName, ...args] = message.content.slice(1).split(' ')
   const command = client.commands.get(commandName)
 

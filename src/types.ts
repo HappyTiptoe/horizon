@@ -41,6 +41,11 @@ export interface Command {
   opts: CommandOpts
 }
 
+export interface MessageHandler {
+  handle: (m: Message, c: Client) => void
+  onError?: (m: Message, as: string[], e: Error) => void
+}
+
 export interface MessageContents {
   title?: string
   description?: string

@@ -1,5 +1,5 @@
 import { Collection } from 'discord.js'
-import { Command } from './types'
+import { Command, MessageHandler } from './types'
 
 declare module 'discord.js' {
   export interface Client {
