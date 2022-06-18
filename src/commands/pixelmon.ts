@@ -21,9 +21,7 @@ function parseArgsOrThrow(args: string[]): [number, PokemonGen] | never {
 
   if (!Object.values(PokemonGen).includes(gen)) {
     throw new Error(
-      `The second argument must be one of the following: ${Object.values(
-        PokemonGen
-      )
+      `The second argument must be one of the following: ${Object.values(PokemonGen)
         .map((v) => `\`${v}\``)
         .join(', ')}`
     )
@@ -130,9 +128,7 @@ function getResultsEmbed(scores: Obj<number>): MessageContents {
 
   return {
     title: 'Game over!',
-    description: finalScoresString
-      ? `**Final Scores**\n${finalScoresString}`
-      : ''
+    description: finalScoresString ? `**Final Scores**\n${finalScoresString}` : ''
   }
 }
 

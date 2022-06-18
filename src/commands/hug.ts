@@ -7,9 +7,7 @@ export function run(message: Message, args: string[], client: Client): void {
 
   send(message, {
     description: `${
-      member
-        ? `${message.member} hugged ${member}`
-        : `${message.member} got hugged`
+      member ? `${message.member} hugged ${member}` : `${message.member} got hugged`
     }`,
     image: { url: gif }
   })

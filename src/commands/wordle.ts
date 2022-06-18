@@ -106,10 +106,7 @@ function evaluateGuess(guess: string, solution: string): EvaluationResults {
         }
       } else if (potentialIncorrectChars.includes(char)) {
         // it's in the word, in WRONG place
-        potentialIncorrectChars = removeItemFromArray(
-          char,
-          potentialIncorrectChars
-        )
+        potentialIncorrectChars = removeItemFromArray(char, potentialIncorrectChars)
 
         return {
           emojis: [...acc.emojis, Emoji.YELLOW],
@@ -119,10 +116,7 @@ function evaluateGuess(guess: string, solution: string): EvaluationResults {
         // it's not in the word
         return {
           emojis: [...acc.emojis, Emoji.BLACK],
-          keyStates: [
-            ...acc.keyStates,
-            { key: char, state: KeyState.NOT_IN_WORD }
-          ]
+          keyStates: [...acc.keyStates, { key: char, state: KeyState.NOT_IN_WORD }]
         }
       }
     },
@@ -139,10 +133,7 @@ function updateKeyboard(
   keyStates.forEach(({ key, state }) => {
     if (keyboard[key] === KeyState.CLEAN) {
       keyboard[key] = state
-    } else if (
-      keyboard[key] === KeyState.NOT_IN_WORD &&
-      state === KeyState.IN_WORD
-    ) {
+    } else if (keyboard[key] === KeyState.NOT_IN_WORD && state === KeyState.IN_WORD) {
       keyboard[key] = state
     }
   })
@@ -159,9 +150,9 @@ export function run(message: Message, args: string[], client: Client): void {
   const guildId = message.guild!.id
   const timeStarted = Date.now()
 
-  if (process.env.NODE_ENV === 'development') {
-    return
-  }
+  //if (process.env.NODE_ENV === 'development') {
+  //  return
+  //}
 
   // prevent command from running in non-permitted Horizon Bound channels
   if (guildId === process.env.SERVER_HB) {

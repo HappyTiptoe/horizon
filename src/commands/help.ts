@@ -22,8 +22,7 @@ export function run(message: Message, args: string[], client: Client): void {
         fields: commands
           .filter(
             // prevent aliases from being displayed as their own commands
-            (command, commandName) =>
-              !command.opts.aliases?.includes(commandName)
+            (command, commandName) => !command.opts.aliases?.includes(commandName)
           )
           .filter((command, commandName) => !commandName.includes(':'))
           .map((command, commandName) => {
@@ -48,8 +47,7 @@ export function onError(message: Message, args: string, error: Error): void {
   send(message, {
     title: 'Error:',
     description: error.message,
-    footer:
-      "Hint: if you messed up the help command, there's no helping you...",
+    footer: "Hint: if you messed up the help command, there's no helping you...",
     color: Color.ERROR
   })
 }
