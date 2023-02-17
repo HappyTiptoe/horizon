@@ -1,7 +1,8 @@
-import { Client, Collection, Intents } from 'discord.js'
+import { Client, Collection, Intents, VoiceBasedChannel } from 'discord.js'
 import { readdirSync } from 'fs'
 import dotenv from 'dotenv'
-import { Command, MessageHandler } from './types'
+import { joinVoiceChannel, DiscordGatewayAdapterCreator } from '@discordjs/voice'
+import { Command } from './types'
 import { handleCommand } from './handleCommand'
 import { handleMessage } from './handleMessage'
 
@@ -54,13 +55,28 @@ async function init() {
     }
   })
 
-  client.on('ready', () => {
+  client.on('ready', async () => {
     client.user?.setActivity('the sunrise.', { type: 'WATCHING' })
     const timestamp = new Date().toLocaleString('en-GB')
     console.log(`[${timestamp}]: Bot online.`)
+
+    const channel = (await client.channels.fetch(
+      '839220539636711455'
+    )) as VoiceBasedChannel
+
+    joinVoiceChannel({
+      channelId: channel.id,
+      guildId: channel.guild.id,
+      adapterCreator: channel.guild.voiceAdapterCreator as DiscordGatewayAdapterCreator
+    })
   })
 
   client.login(process.env.DISCORD_API_KEY)
+
+  // joinVoiceChannel({
+  //   channelId:
+  //   guildId: channel.guild.id
+  // })
 }
 
 init()

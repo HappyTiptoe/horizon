@@ -18,7 +18,6 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'warn',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
