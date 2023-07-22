@@ -64,6 +64,7 @@ async function init() {
       '839220539636711455'
     )) as VoiceBasedChannel
 
+    /* join voice chat */
     joinVoiceChannel({
       channelId: channel.id,
       guildId: channel.guild.id,

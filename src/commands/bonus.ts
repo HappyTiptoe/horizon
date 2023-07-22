@@ -1,5 +1,5 @@
 import { Client, Message } from 'discord.js'
-import { isBlank, randomNumber } from 'tsu'
+import { isBlank, max, min, randomNumber } from 'tsu'
 import { Color } from '../types'
 import { send } from '../utils'
 
@@ -26,7 +26,19 @@ export function run(message: Message, args: string[], client: Client): void {
     throw new Error('The first argument must be a number between [0-10001].')
   }
 
-  const roll = rollDice('hundred')
+  const unit = rollDice('unit')
+  const tens = [rollDice('ten'), rollDice('ten')]
+
+  let roll: number
+
+  if (unit === 0 && tens.every((t) => t === 0)) {
+    roll = 100
+  } else if (unit === 0 && tens.includes(0)) {
+    roll = max(tens)
+  } else {
+    const lowestTen = min(tens)
+    roll = lowestTen + unit
+  }
 
   const extremeSuccess = Math.floor(skill / 5)
   const hardSuccess = Math.floor(skill / 2)
@@ -71,7 +83,7 @@ export function onError(message: Message, args: string, error: Error): void {
 
 export const opts = {
   description:
-    'Rolls a d100 against the chosen number and returns the success level or failure.',
-  usage: '%coc <skill level>',
-  aliases: ['cock']
+    'Performs a bonus Call of Cthulhu dice roll against the chosen number and returns the success level or failure.',
+  usage: '%bonus <skill level>',
+  aliases: []
 }
